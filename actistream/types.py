@@ -1,21 +1,7 @@
 import json
-from django.utils import six
 
 from actistream import registry
 from .adapter import get_adapter
-
-
-class ActivityTypeMeta(type):
-    def __new__(mcs, name, bases, d):
-        userdef = bases[0] != object
-        if userdef:
-            d['app'] = d['__module__'].split('.')[-2]
-            d['code'] = name.lower()
-            d['id'] = d['app'] + '.' + d['code']
-        ret = type.__new__(mcs, name, bases, d)
-        if userdef:
-            registry.register(ret)
-        return ret
 
 
 class ActivityWrapper(object):
@@ -62,7 +48,6 @@ class ActivityWrapper(object):
         return msg
 
 
-@six.add_metaclass(ActivityTypeMeta)
 class ActivityType(object):
     aliases = {}
     Wrapper = ActivityWrapper
