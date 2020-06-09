@@ -117,7 +117,7 @@ class Activity(models.Model):
     target_ct = models.ForeignKey(ContentType, related_name='+',
                                   blank=True, null=True,
                                   on_delete=models.CASCADE)
-    target_id = models.PositiveIntegerField()
+    target_id = models.PositiveIntegerField(blank=True, null=True)
     target = GenericForeignKey('target_ct', 'target_id')
 
     action_object_ct = models.ForeignKey(ContentType, related_name='+',
@@ -134,7 +134,7 @@ class Activity(models.Model):
     extra_data = models.TextField(
         _("additional data"),
         blank=True)
-    created_at = models.DateTimeField(_("created at"), auto_now_add=True)
+    created_at = models.DateTimeField('created at', auto_now_add=True)
 
     class Meta:
         verbose_name = _('activity')
