@@ -60,8 +60,7 @@ class ActivityType(object):
         for k, v in kwargs.items():
             activity_kwargs[cls.aliases.get(k, k)] = v
         extra_data = activity_kwargs.get('extra_data')
-        if extra_data is not None and not isinstance(
-                extra_data, string):
+        if extra_data is not None:
             activity_kwargs['extra_data'] = json.dumps(extra_data)
         activity = Activity(type=cls.id,
                             **activity_kwargs)
