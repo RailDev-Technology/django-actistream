@@ -130,6 +130,9 @@ class Activity(models.Model):
     type = models.CharField(max_length=100,
                             choices=registry.as_choices(),
                             verbose_name=_("type"))
+
+    verb = models.CharField(max_length=200)
+
     flags = models.BigIntegerField(default=0)  # Project specific flags
     extra_data = models.TextField(
         _("additional data"),
